@@ -18,19 +18,13 @@ screen = pygame.display.set_mode((screen_width, screen_height), pygame.FULLSCREE
 middle_x = screen_width // 2
 middle_y = screen_height // 2
 
-count_move = 0
-pair = 0
+
 
 # Boucle principale
 running = True
 while running:
 
-    UP = (0, -5)
-    DOWN = (0, 5)
-    LEFT = (-5, 0)
-    RIGHT = (5, 0)
-    colore = (255, 255, 0)
-    col = (0, 0, 0)
+    
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -44,8 +38,19 @@ while running:
     # Effacer l'écran
     screen.fill((0, 0, 0))
 
+    #Variable utilisées
     start_pos = (middle_x, middle_y)
     end_pos = (middle_x, middle_y)
+    UP = (0, -5)
+    DOWN = (0, 5)
+    LEFT = (-5, 0)
+    RIGHT = (5, 0)
+    colore = (255, 255, 0)
+    col = (0, 0, 0)
+    count_move = 0
+    pair = 0
+    values_R = np.random.uniform(0, 255, 3)
+    RandomColor = tuple(np.round(values_R))
 
     while end_pos[0] <= screen_width or end_pos[1] <= screen_height:
 
@@ -82,7 +87,7 @@ while running:
         MoveChoice = [RIGHT, UP, LEFT, DOWN]
         move = MoveChoice[count_move % 4]
         end_pos = (start_pos[0] + move[0], start_pos[1] + move[1])
-        pygame.draw.line(screen, colore, start_pos, end_pos, 1)
+        pygame.draw.line(screen, RandomColor, start_pos, end_pos, 1)
         start_pos = end_pos
 
         if pair % 2 == 1:
@@ -106,6 +111,11 @@ while running:
     DOWN = (0, 5)
     LEFT = (-5, 0)
     RIGHT = (5, 0)
+    count_move = 0
+    pair = 0
+
+    values_R = np.random.uniform(0, 255, 3)
+    RandomColor = tuple(np.round(values_R))
 
     while end_pos[0] <= screen_width or end_pos[1] <= screen_height:
 
@@ -134,7 +144,7 @@ while running:
 
 
         
-        values = np.random.uniform(0, 255, 3)
+        values = np.random.uniform(0, 255, 1)
         color = tuple(np.round(values))
 
         col = ((col[0] + 10)%256, (col[1] + 10)%256, (col[2] + 10)%256)
@@ -142,7 +152,7 @@ while running:
         MoveChoice = [RIGHT, UP, LEFT, DOWN]
         move = MoveChoice[count_move % 4]
         end_pos = (start_pos[0] + move[0], start_pos[1] + move[1])
-        pygame.draw.line(screen, Black, start_pos, end_pos, 1)
+        pygame.draw.line(screen, RandomColor, start_pos, end_pos, 1)
         start_pos = end_pos
 
         if pair % 2 == 1:
@@ -156,6 +166,7 @@ while running:
 
         pygame.display.flip()
         pygame.time.delay(5)  # Ajout d'un délai de 0.5 seconde
+
 
 # Quitter Pygame
 pygame.quit()
